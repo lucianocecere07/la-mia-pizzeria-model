@@ -5,29 +5,47 @@
 }
 
 <body>
-    <div class="container">
-        <h1 class="my-3">Le mie pizze</h1>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col" style="width: 20%">Foto</th>
-                    <th scope="col">Prezzo</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Margherita</td>
-                    <td>pomodoro, mozzarella e basilico</td>
-                    <td><img src="Foto" class="img-fluid" alt="Margherita"></td>
-                    <td>5.50€</td>
-                </tr>
-            </tbody>
-        </table>
+    @model List<Pizza>
 
-    </div>
+    @if(Model.Count == 0)
+    {
+        <h1>Non ci sono pizze da selezionare</h1>
+    }
+    else
+    {
+        <div class="container">
+            <h1 class="my-3">Le mie pizze</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col" style="width: 20%">Foto</th>
+                        <th scope="col">Prezzo</th>
+                        <th scope="col">Dettagli</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-group-divider">
+                    @foreach(Pizza pizza in Model)
+                    {
+                        <tr>
+                            <th scope="row">@pizza.Id</th>
+                            <td>@pizza.Name</td>
+                            <td>@pizza.Description</td>
+                            <td><img src="@pizza.Image" class="img-fluid" alt="Immagine Pizza"></td>
+                            <td>@pizza.Price €</td>
+                            <td><a class="btn btn-link" href="@Url.Action("Dettagli", "Pizza", new { idScelto = pizza.Id } )" role="button">Dettagli</a></td>
+                            <!--<td><button type="button" class="btn btn-link" asp-area="" asp-controller="Pizza" asp-action="Dettagli" asp-route-id="pizza.Id">Dettagli</button></td>-->
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    }
 </body>
