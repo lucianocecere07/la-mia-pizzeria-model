@@ -37,9 +37,8 @@
                             <td>@pizza.Name</td>
                             <td>@pizza.Description</td>
                             <td><img src="@pizza.Image" class="img-fluid" alt="@pizza.Name"></td>
-                            <td>@pizza.Price €</td>
+                            <td>@pizza.Price.ToString("F") €</td>
                             <td><a class="btn btn-link" href="@Url.Action("Dettagli", "Pizza", new { idScelto = pizza.Id } )" role="button">Dettagli</a></td>
-                            <!--<td><button type="button" class="btn btn-link" asp-area="" asp-controller="Pizza" asp-action="Dettagli" asp-route-id="pizza.Id">Dettagli</button></td>-->
                         </tr>
                     }
                 </tbody>
